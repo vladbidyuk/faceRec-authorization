@@ -3,7 +3,10 @@ from imutils import face_utils
 import dlib
 import copy
 import cv2
+import os
 
+faceList = []
+for filelist in os.listdir("Users/"):	faceList.append("Users/" + filelist)
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor("Modules/dlibFiles/shape_predictor_68_face_landmarks.dat")
 faceRec = dlib.face_recognition_model_v1('Modules/dlibFiles/dlib_face_recognition_resnet_model_v1.dat')
@@ -23,18 +26,19 @@ while(True):
         face_descriptor1 = faceRec.compute_face_descriptor(origin, shape)   # return 128 paramentes of your face
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        Buffer = cv2.imread("Users/user1.jpg")
+        for i in range(len(faceList)):
+            Buffer = cv2.imread(faceList[i])
 
-        rects = detector(Buffer, 0) # face cord on the image from folder
-        for (i, rect) in enumerate(rects):
-            Shape = predictor(Buffer, rect)  # return image prediction <dlib.full_object_detection object ...>
-        face_descriptor2 = faceRec.compute_face_descriptor(Buffer, Shape)  # return 128 paramentes of face on the photo
+            rects = detector(Buffer, 0) # face cord on the image from folder
+            for (i, rect) in enumerate(rects):
+                Shape = predictor(Buffer, rect)  # return image prediction <dlib.full_object_detection object ...>
+            face_descriptor2 = faceRec.compute_face_descriptor(Buffer, Shape)  # return 128 paramentes of face on the photo
 
-        a = distance.euclidean(face_descriptor1, face_descriptor2)  # calculate distance of points between your face and photos
-        if a < 0.6:
-            cv2.imshow("Access allowed to: ", Buffer)
-        else:
-            print("Access not allowed!")
+            a = distance.euclidean(face_descriptor1, face_descriptor2)  # calculate distance of points between your face and photos
+            if a < 0.6:
+                cv2.imshow("Access allowed to: ", Buffer)
+            else:
+                print("Access not allowed!")
 
     cv2.imshow("Frame", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):   break
