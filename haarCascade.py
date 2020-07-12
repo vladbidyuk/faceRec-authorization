@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import numpy
 import cv2
 import os
