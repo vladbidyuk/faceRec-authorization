@@ -1,0 +1,68 @@
+###############################################################
+### The following file contain requirements for application ###
+###############################################################
+
+Input sources:
+ - Frames:
+   > Video files and real-time stream video
+     * Types: [ mp4 ]
+   > Images.
+     * Types: [ png, jpeg ]
+
+ - Audio:
+   > Audio files and real-time audio recording
+     * Types: [ mp3 ]
+===========================================================
+
+
+ - Used three types of users [Green, Yellow, Red]:
+   > Green:  Allowed users group
+   > Yellow: Unknown users group
+   > Red:    Restricted users group
+
+ - System interaction with user depending on the type of group [Green, Yellow, Red]:
+   > Welcome message and action depends from group
+   > Each functionality availability depends from user group
+   > Detection and recognition works for any group
+   > Red group users should be recorded, data sended in cloud and sms send to admin
+
+ - Ways of interacting with the system
+   > Visual:
+     * Gestures
+     * Palm tracking used as mouse
+   > Audio:
+     * Voice commands
+   > Physical input devices:
+     * Keyboard, mouse
+
+ - System functionality by type of interacting:
+   > [Visual] Control media systems (! Should be found elastic media player !):
+     * Volume (Up, Down)
+     * Tracks change (Backward, Start/Pause, Forward)
+   > [Visual] Get weather in my location
+
+ - System should to know current status of users:
+   > User states: [Available, Unavailable]
+
+ - Data about users are contained in .csv files
+   > Files encrypted
+
+ - System works in few modes:
+   > Monitoring  (Normal default mode)
+   > Configuring (Admin mode, used to add new users)
+     * Started by gesture by user from Green group
+
+### Security
+ - Should be implemented any encryption/decryption mechanism to protect user data.
+
+### Security end
+
+### Performance
+ - Use pooling to reduce image size
+ - Set low frame rate
+
+ - Use another library for detection and recognition of users and gestures, dlib
+   is too heavy.
+ ? Implement multithreading for frame preprocessing
+
+### Performance end
