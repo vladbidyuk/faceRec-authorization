@@ -14,8 +14,8 @@ for filelist in os.listdir("Users/"):
     faceList.append("Users/" + filelist)
 
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("Modules/dlibFiles/shape_predictor_68_face_landmarks.dat")
-faceRec = dlib.face_recognition_model_v1('Modules/dlibFiles/dlib_face_recognition_resnet_model_v1.dat')
+predictor = dlib.shape_predictor("./shape_predictor_68_face_landmarks.dat")
+faceRec = dlib.face_recognition_model_v1('./dlib_face_recognition_resnet_model_v1.dat')
 
 cap = cv2.VideoCapture(0)           # use web camera as video source
 cap.set(cv2.CAP_PROP_FPS, 2)        # set frame rate to lower
